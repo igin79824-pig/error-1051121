@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國二上國文（第四課～第六課含語文常識二）注音國字錯題診斷與特訓</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#FAF8F5',
+            card: '#FFFFFF',
+            ink: '#2C3E50',
+            pine: {
+              DEFAULT: '#2D5A4C',
+              light: '#3E7866',
+              pale: '#EAF2EF',
+              border: '#C5DCD4'
+            },
+            amberwarm: {
+              DEFAULT: '#D97736',
+              light: '#F39C5E',
+              pale: '#FDF2EA',
+              border: '#F5D3BA'
+            }
+          },
+          fontFamily: {
+            sans: ['"Noto Sans TC"', '"Microsoft JhengHei"', '"PingFang TC"', 'sans-serif'],
+            serif: ['"Noto Serif TC"', '"PMingLiU"', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      background-color: #FAF8F5;
+      color: #2C3E50;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    /* 確保注音符號與聲調符號清晰易讀、不重疊 */
+    .zhuyin {
+      font-family: "Bopomofo", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+      padding: 0 2px;
+    }
+    .option-btn {
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .option-btn:active:not(:disabled) {
+      transform: scale(0.985);
+    }
+    /* 自訂捲軸 */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1EDE6;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C5DCD4;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2D5A4C;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- 頂部固定資訊與進度列 -->
+  <header class="sticky top-0 z-30 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#E5DFD5] shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-3 sm:py-4">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2 text-xs font-bold tracking-wider text-pine uppercase mb-1">
+            <span class="px-2 py-0.5 rounded-full bg-pine-pale border border-pine-border">二年級上學期國文科</span>
+            <span>第二次段考錯題弱點特訓</span>
+          </div>
+          <h1 class="text-lg sm:text-xl md:text-2xl font-serif font-bold text-ink leading-snug">
+            國二上國文（第四課～第六課含語文常識二）注音國字錯題診斷與特訓
+          </h1>
+        </div>
+
+        <!-- 數據統計膠囊 -->
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
+          <div class="bg-white border border-[#E5DFD5] rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-xs">
+            <span class="text-xs text-slate-500">完成進度</span>
+            <span id="stat-progress" class="text-sm sm:text-base font-bold text-pine">0 / 60</span>
+          </div>
+          <div class="bg-white border border-[#E5DFD5] rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-xs">
+            <span class="text-xs text-slate-500">正確率</span>
+            <span id="stat-accuracy" class="text-sm sm:text-base font-bold text-amberwarm">--%</span>
+          </div>
+          <button onclick="openSummaryModal()" class="bg-pine hover:bg-pine-light text-white text-xs sm:text-sm font-medium px-3.5 py-2 rounded-xl shadow-xs transition cursor-pointer flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            <span>成績診斷</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 進度條 -->
+      <div class="w-full h-1.5 bg-[#E8E2D7] rounded-full overflow-hidden mt-3">
+        <div id="progress-bar" class="h-full bg-pine transition-all duration-300" style="width: 0%"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-6">
+
+    <!-- 篩選與操作控制列 -->
+    <div class="bg-white rounded-2xl border border-[#E5DFD5] p-3 sm:p-4 mb-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div class="flex items-center gap-2 flex-wrap">
+        <span class="text-xs font-bold text-slate-500 mr-1">檢視模式：</span>
+        <button id="filter-all" onclick="setFilterMode('all')" class="px-3.5 py-1.5 rounded-xl text-sm font-medium bg-pine text-white shadow-xs transition cursor-pointer">
+          全部題目 (60)
+        </button>
+        <button id="filter-wrong" onclick="setFilterMode('wrong')" class="px-3.5 py-1.5 rounded-xl text-sm font-medium bg-amberwarm-pale text-amberwarm border border-amberwarm-border hover:bg-amberwarm hover:text-white transition cursor-pointer flex items-center gap-1.5">
+          <span>只看錯題本</span>
+          <span id="wrong-badge" class="px-1.5 py-0.2 text-xs font-bold rounded-full bg-amberwarm text-white">0</span>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2 self-end sm:self-auto">
+        <button onclick="toggleDiagnosisCard()" id="toggle-diag-btn" class="text-xs sm:text-sm text-pine hover:underline font-medium px-2.5 py-1.5 rounded-lg hover:bg-pine-pale transition cursor-pointer">
+          收合診斷口訣卡
+        </button>
+        <button onclick="confirmReset()" class="text-xs sm:text-sm text-slate-500 hover:text-rose-600 font-medium px-2.5 py-1.5 rounded-lg hover:bg-rose-50 transition cursor-pointer">
+          重置作答
+        </button>
+      </div>
+    </div>
+
+    <!-- 四大錯題分類分頁導覽 (Tabs) -->
+    <nav aria-label="錯題分類分頁" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 mb-6">
+      <button onclick="selectCategory(0)" id="tab-0" class="tab-btn text-left p-3.5 rounded-2xl border-2 transition cursor-pointer flex flex-col justify-between bg-pine text-white border-pine shadow-sm">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-bold opacity-85">分類一 · 5 原題</span>
+          <span id="tab-count-0" class="text-xs px-2 py-0.5 rounded-full bg-white/20 font-semibold">0/15</span>
+        </div>
+        <div class="font-bold text-sm sm:text-base">同音異字與字義辨析</div>
+      </button>
+
+      <button onclick="selectCategory(1)" id="tab-1" class="tab-btn text-left p-3.5 rounded-2xl border-2 transition cursor-pointer flex flex-col justify-between bg-white text-ink border-[#E5DFD5] hover:border-pine-border">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-bold text-slate-500">分類二 · 5 原題</span>
+          <span id="tab-count-1" class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">0/15</span>
+        </div>
+        <div class="font-bold text-sm sm:text-base">字形結構與偏旁細節</div>
+      </button>
+
+      <button onclick="selectCategory(2)" id="tab-2" class="tab-btn text-left p-3.5 rounded-2xl border-2 transition cursor-pointer flex flex-col justify-between bg-white text-ink border-[#E5DFD5] hover:border-pine-border">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-bold text-slate-500">分類三 · 5 原題</span>
+          <span id="tab-count-2" class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">0/15</span>
+        </div>
+        <div class="font-bold text-sm sm:text-base">易錯字形與聲調辨正</div>
+      </button>
+
+      <button onclick="selectCategory(3)" id="tab-3" class="tab-btn text-left p-3.5 rounded-2xl border-2 transition cursor-pointer flex flex-col justify-between bg-white text-ink border-[#E5DFD5] hover:border-pine-border">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs font-bold text-slate-500">分類四 · 5 原題</span>
+          <span id="tab-count-3" class="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold">0/15</span>
+        </div>
+        <div class="font-bold text-sm sm:text-base">多音字與聲調偏旁陷阱</div>
+      </button>
+    </nav>
+
+    <!-- 錯題診斷與記憶口訣卡片區 -->
+    <section id="diagnosis-section" class="mb-8">
+      <div class="bg-white rounded-2xl border border-pine-border shadow-xs overflow-hidden">
+        <div class="bg-pine-pale px-5 py-3.5 border-b border-pine-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div class="flex items-center gap-2">
+            <span class="w-7 h-7 rounded-lg bg-pine text-white flex items-center justify-center font-serif font-bold text-sm">診</span>
+            <h2 id="diag-title" class="font-serif font-bold text-pine text-base sm:text-lg">
+              第一類：同音異字與字義辨析 — 原卷錯題診斷與記憶口訣
+            </h2>
+          </div>
+          <span class="text-xs text-pine font-medium">先讀懂錯因與口訣，再做下方 15 題特訓！</span>
+        </div>
+
+        <div id="diag-cards-container" class="p-4 sm:p-5 grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          <!-- 由 JS 動態渲染原卷錯題診斷卡 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 互動練習題列表區 -->
+    <section>
+      <div class="flex items-center justify-between mb-4">
+        <h3 id="quiz-section-title" class="font-serif font-bold text-lg sm:text-xl text-ink flex items-center gap-2">
+          <span class="w-2 h-6 bg-amberwarm rounded-full inline-block"></span>
+          <span>特訓練習題（共 15 題）</span>
+        </h3>
+        <span id="quiz-sub-hint" class="text-xs sm:text-sm text-slate-500">點擊選項立即批改並顯示解析</span>
+      </div>
+
+      <div id="quiz-list" class="space-y-5">
+        <!-- 由 JS 動態渲染題目卡片 -->
+      </div>
+
+      <!-- 錯題模式空狀態提示 -->
+      <div id="empty-wrong-state" class="hidden bg-white rounded-2xl border border-[#E5DFD5] p-10 text-center shadow-xs">
+        <div class="w-14 h-14 rounded-full bg-pine-pale text-pine mx-auto flex items-center justify-center mb-3 text-2xl font-bold">✓</div>
+        <h4 class="font-serif font-bold text-lg text-ink mb-1">此分類目前沒有答錯的題目！</h4>
+        <p class="text-sm text-slate-500 mb-4">表現很棒！你可以切換其他分類繼續練習，或切回「全部題目」檢視所有題目。</p>
+        <button onclick="setFilterMode('all')" class="px-4 py-2 rounded-xl bg-pine text-white text-sm font-medium hover:bg-pine-light transition cursor-pointer">
+          顯示全部題目
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- 頁尾 -->
+  <footer class="mt-12 border-t border-[#E5DFD5] bg-white py-5 px-4 text-center text-xs text-slate-500">
+    國二上學期國文科第二次段考（第四課～第六課含語文常識二）注音國字錯題特訓系統 · 專為國中自主複習設計
+  </footer>
+
+  <!-- 成績單總結 Modal -->
+  <div id="summary-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full border border-[#E5DFD5] shadow-xl overflow-hidden animate-fade-in">
+      <div class="bg-pine text-white px-5 py-4 flex items-center justify-between">
+        <h3 class="font-serif font-bold text-lg">學習成果與弱點診斷報告</h3>
+        <button onclick="closeSummaryModal()" class="text-white/80 hover:text-white text-xl leading-none cursor-pointer p-1">&times;</button>
+      </div>
+      <div class="p-5 space-y-4">
+        <div class="grid grid-cols-3 gap-3 text-center">
+          <div class="bg-paper rounded-xl p-3 border border-[#E5DFD5]">
+            <div class="text-xs text-slate-500 mb-1">已完成題數</div>
+            <div id="modal-done" class="text-xl font-bold text-ink">0 / 60</div>
+          </div>
+          <div class="bg-pine-pale rounded-xl p-3 border border-pine-border">
+            <div class="text-xs text-pine mb-1">答對題數</div>
+            <div id="modal-correct" class="text-xl font-bold text-pine">0</div>
+          </div>
+          <div class="bg-amberwarm-pale rounded-xl p-3 border border-amberwarm-border">
+            <div class="text-xs text-amberwarm mb-1">總正確率</div>
+            <div id="modal-rate" class="text-xl font-bold text-amberwarm">0%</div>
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">四大分類掌握度分析</div>
+          <div id="modal-bars" class="space-y-2.5">
+            <!-- JS 動態填入進度條 -->
+          </div>
+        </div>
+
+        <div id="modal-advice" class="bg-paper rounded-xl p-3.5 border border-[#E5DFD5] text-sm text-ink leading-relaxed">
+          <!-- JS 動態填入建議 -->
+        </div>
+      </div>
+      <div class="px-5 py-3.5 bg-paper border-t border-[#E5DFD5] flex justify-end gap-2">
+        <button onclick="closeSummaryModal(); setFilterMode('wrong');" class="px-4 py-2 rounded-xl bg-amberwarm text-white text-sm font-medium hover:opacity-90 transition cursor-pointer">
+          前往錯題本複習
+        </button>
+        <button onclick="closeSummaryModal()" class="px-4 py-2 rounded-xl bg-pine text-white text-sm font-medium hover:bg-pine-light transition cursor-pointer">
+          繼續練習
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 自訂確認重置 Modal (絕不使用 window.confirm) -->
+  <div id="reset-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+    <div class="bg-white rounded-2xl max-w-sm w-full border border-[#E5DFD5] shadow-xl p-5">
+      <h4 class="font-serif font-bold text-lg text-ink mb-2">確定要重置所有作答進度嗎？</h4>
+      <p class="text-sm text-slate-600 mb-5 leading-relaxed">
+        重置後，60 題的作答紀錄與錯題本收藏將會清空，讓你可以重新進行一輪完整測驗。
+      </p>
+      <div class="flex justify-end gap-2">
+        <button onclick="closeResetModal()" class="px-4 py-2 rounded-xl border border-[#E5DFD5] text-sm font-medium text-slate-600 hover:bg-slate-50 cursor-pointer">
+          取消
+        </button>
+        <button onclick="executeReset()" class="px-4 py-2 rounded-xl bg-rose-600 text-white text-sm font-medium hover:bg-rose-700 cursor-pointer">
+          確定重置
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 完整錯題資料庫：四大分類 × 5 原題 × 3 衍生測驗題 = 60 題
+    // =========================================================================
+    const categoriesData = [
+      {
+        id: 0,
+        name: "第一類：同音異字與字義辨析",
+        shortName: "同音異字與字義辨析",
+        diagnoses: [
+          {
+            origNum: 18,
+            prompt: "「ㄇㄢˋ」罵",
+            wrong: "漫",
+            correct: "謾",
+            mnemonic: "【言部表說話】用言語侮辱責罵是「謾（言部）」；水勢無邊、不受拘束才是「漫（水部）」。"
+          },
+          {
+            origNum: 32,
+            prompt: "蓮「ㄡˇ」",
+            wrong: "偶",
+            correct: "藕",
+            mnemonic: "【艸頭表植物】蓮花的地下莖是植物，用艸字頭「藕」；雙數、木偶、偶然用人部「偶」。"
+          },
+          {
+            origNum: 44,
+            prompt: "和「ㄞˇ」可親",
+            wrong: "藹",
+            correct: "靄",
+            mnemonic: "【雨部表和氣雲氣】「和靄可親」依課本標準寫作雨字頭「靄」；「藹（艸部）」多指草木茂盛或和善（如藹然、幽藹）。"
+          },
+          {
+            origNum: 45,
+            prompt: "暮「ㄞˇ」沉沉",
+            wrong: "靄",
+            correct: "藹（辨析：靄／藹）",
+            mnemonic: "【雨部 vs 艸部精準區辨】「暮靄」本義為傍晚雲霧，標準多作「靄（雨部）」；本卷第45題批改作「藹（艸部，表草木幽深茂盛）」。考試務必看清「雲氣用靄（雨）、草木幽深或和善用藹（艸）」。"
+          },
+          {
+            origNum: 73,
+            prompt: "呱呱墜「ㄉㄧˋ／ㄑㄩˋ」",
+            wrong: "墬（未寫對）",
+            correct: "地（墜地）",
+            mnemonic: "【嬰兒落地大哭】成語「呱呱墜地（ㄍㄨ ㄍㄨ ㄓㄨㄟˋ ㄉㄧˋ）」指嬰兒出生時哭著落到地上，「墜」為土在下方，後接「地」。"
+          }
+        ],
+        questions: [
+          // --- 原卷第 18 題衍生 (3題) ---
+          {
+            id: "c0_q1",
+            origNum: 18,
+            subIndex: 1,
+            type: "課內詞語填空",
+            question: "網路匿名文化盛行，常有人在留言區惡意「ㄇㄢˋ」罵他人，這種行為既不道德也觸法。引號中的國字應填入何者？",
+            options: ["漫", "謾", "慢", "蔓"],
+            answer: 1,
+            explanation: "「謾罵」意指用言語輕慢地辱罵，與「言語」有關，故從「言」部，寫作「謾」。「漫」為水部，表水多或不受拘束（如漫步）。"
+          },
+          {
+            id: "c0_q2",
+            origNum: 18,
+            subIndex: 2,
+            type: "同音字辨析",
+            question: "下列各組「ㄇㄢˋ」字的用字，何者完全正確？",
+            options: [
+              "散謾無章／漫不經心",
+              "謾天大謊／輕歌曼舞",
+              "謾罵攻擊／漫山遍野",
+              "態度傲謾／蔓草叢生"
+            ],
+            answer: 2,
+            explanation: "C 項「謾罵攻擊（言部，辱罵）」與「漫山遍野（水部，滿布）」皆正確。A 應為「散漫」；B 應為「漫天大謊」；D 應為「傲慢」。"
+          },
+          {
+            id: "c0_q3",
+            origNum: 18,
+            subIndex: 3,
+            type: "錯別字診斷",
+            question: "「他在比賽失利後，不但沒有自我檢討，反而對裁判大肆漫罵，引來觀眾一陣噓聲。」句中的錯別字應如何訂正？",
+            options: [
+              "「漫」改為「謾」",
+              "「肆」改為「肄」",
+              "「噓」改為「虛」",
+              "「檢」改為「撿」"
+            ],
+            answer: 0,
+            explanation: "「漫罵」為錯別字，責罵屬於言語行為，應改為言字旁的「謾罵」。"
+          },
+
+          // --- 原卷第 32 題衍生 (3題) ---
+          {
+            id: "c0_q4",
+            origNum: 32,
+            subIndex: 1,
+            type: "課內詞語填空",
+            question: "夏天盛產的蓮「ㄡˇ」清脆爽口，無論涼拌或燉排骨湯都非常美味。引號中的國字應填入何者？",
+            options: ["偶", "藕", "耦", "寓"],
+            answer: 1,
+            explanation: "「蓮藕」是蓮的地下莖，屬於植物，因此部首為「艸」部，寫作「藕」。"
+          },
+          {
+            id: "c0_q5",
+            origNum: 32,
+            subIndex: 2,
+            type: "形近字辨析",
+            question: "下列詞語中，哪一個詞語的「ㄡˇ」字必須使用「艸」字頭？",
+            options: [
+              "無獨有「ㄡˇ」",
+              "「ㄡˇ」斷絲連",
+              "木「ㄡˇ」戲劇",
+              "「ㄡˇ」然相遇"
+            ],
+            answer: 1,
+            explanation: "「藕斷絲連」比喻表面斷絕關係，實際上仍有牽連，原意指蓮藕折斷時仍有細絲相連，故用「藕」。其餘皆用「偶」。"
+          },
+          {
+            id: "c0_q6",
+            origNum: 32,
+            subIndex: 3,
+            type: "字義與部首推論",
+            question: "小華把「蓮藕」誤寫成「蓮偶」，下列哪一項說明最能幫助他記住正確寫法？",
+            options: [
+              "「偶」是兩人成雙的意思，蓮花只有一朵所以不能用偶",
+              "蓮藕是水生植物的根莖，植物類的字大多從「艸」部",
+              "「藕」字讀作二聲，「偶」字讀作三聲，讀音不同",
+              "「偶」只能用在成語中，日常食物名稱一律用「藕」"
+            ],
+            answer: 1,
+            explanation: "漢字「艸」部多與草本植物有關，蓮藕為植物器官，故從「艸」作「藕」。兩字皆讀作「ㄡˇ」。"
+          },
+
+          // --- 原卷第 44 題衍生 (3題) ---
+          {
+            id: "c0_q7",
+            origNum: 44,
+            subIndex: 1,
+            type: "標準用字辨析",
+            question: "王老師平時總是笑容滿面、和「ㄞˇ」可親，深受全班同學愛戴。依國中教科書標準，引號中應填入何字？",
+            options: ["靄", "藹", "矮", "挨"],
+            answer: 0,
+            explanation: "在國中國文課本與教育部辭典常用規範中，「和靄可親」的「靄」從「雨」部，形容性情溫和、態度平易近人。"
+          },
+          {
+            id: "c0_q8",
+            origNum: 44,
+            subIndex: 2,
+            type: "同音字辨析",
+            question: "關於「靄」與「藹」的字形與用法，下列敘述何者正確？",
+            options: [
+              "「靄」為雨字頭，本義為雲氣，引申為和氣，如「和靄」",
+              "「藹」為言字旁，專指說話溫柔有禮貌",
+              "「和靄可親」與「身材矮小」的「靄、矮」部首相同",
+              "「靄」只能用來形容下雨天的烏雲，不可形容人的態度"
+            ],
+            answer: 0,
+            explanation: "「靄」從「雨」部，本義為雲氣，引申為溫和之氣（如「和靄可親」）；「藹」則是「艸」部，本義為草木茂盛。"
+          },
+          {
+            id: "c0_q9",
+            origNum: 44,
+            subIndex: 3,
+            type: "情境應用題",
+            question: "下列句子中，「靄」字的使用何者最為恰當？",
+            options: [
+              "這座山谷林木茂密，呈現一片翠綠幽靄的景象",
+              "爺爺雖然年紀大了，但精神矍鑠，對人總是和靄可親",
+              "這張桌子太靄了，坐起來膝蓋會頂到桌面",
+              "他因為靄了老師一頓罵，整天垂頭喪氣"
+            ],
+            answer: 1,
+            explanation: "B 項「和靄可親」正確。A 項形容草木茂盛幽深宜用「幽藹（艸部）」；C 應為「矮」；D 應為「挨」。"
+          },
+
+          // --- 原卷第 45 題衍生 (3題) ---
+          {
+            id: "c0_q10",
+            origNum: 45,
+            subIndex: 1,
+            type: "考題重點辨析",
+            question: "在本次段考練習卷第 44、45 題中，「和靄可親」作「靄（雨部）」，而第 45 題「暮『ㄞˇ』沉沉」試卷訂正為「藹（艸部）」。若要區分「靄」與「藹」，下列哪一組詞語的「藹（艸部）」用法最道地？",
+            options: [
+              "「藹」然可親／林木幽「藹」",
+              "雲「藹」繚繞／煙「藹」迷濛",
+              "和「藹」可親／「藹」氣籠罩",
+              "「藹」雨霏霏／白「藹」蒼茫"
+            ],
+            answer: 0,
+            explanation: "「藹」從艸，本義為草木茂盛（如「林木幽藹」），亦通「靄」表和善（如「藹然」）；凡與雲氣、霧氣直接相關者多用「靄（雨部）」。本題旨在強化兩字部首差異。"
+          },
+          {
+            id: "c0_q11",
+            origNum: 45,
+            subIndex: 2,
+            type: "部首聯想記憶",
+            question: "「夕陽西下，遠山籠罩在一片暮『ㄞˇ』沉沉的薄霧之中。」若從「薄霧、雲氣」的字義來選擇部首，應選哪一個字？",
+            options: ["靄（雨部）", "藹（艸部）", "艾（艸部）", "隘（阜部）"],
+            answer: 0,
+            explanation: "從字源與部首造字原則來看，「暮靄」指傍晚的雲霧之氣，因此「雨」字頭的「靄」最符合雲氣本義；做題時也需留意老師強調「和靄（雨）」與「藹（艸）」的字形差異。"
+          },
+          {
+            id: "c0_q12",
+            origNum: 45,
+            subIndex: 3,
+            type: "形近字結構檢核",
+            question: "比較「靄」與「藹」兩字的字形結構，下列敘述何者正確？",
+            options: [
+              "兩字的聲符都是「謁」，所以讀音都唸作「ㄧㄝˋ」",
+              "兩字的右下方都是「謁」，只差在上方部首是「雨」或「艸」",
+              "「靄」是左右結構，「藹」是上下結構",
+              "「藹」字裡面包含一個「言」字和一個「曷」字，所以部首是「言」部"
+            ],
+            answer: 1,
+            explanation: "「靄」為雨部（雨＋謁），「藹」為艸部（艸＋謁），兩者下方皆為「謁」，讀音皆為「ㄞˇ」，寫作時切勿混用部首。"
+          },
+
+          // --- 原卷第 73 題衍生 (3題) ---
+          {
+            id: "c0_q13",
+            origNum: 73,
+            subIndex: 1,
+            type: "成語字形辨析",
+            question: "「每個生命從呱呱墜『ㄉㄧˋ』的那一刻起，就承載著父母滿滿的期許。」引號中應填入哪一個字？",
+            options: ["地", "弟", "帝", "遞"],
+            answer: 0,
+            explanation: "成語「呱呱墜地」音 ㄍㄨ ㄍㄨ ㄓㄨㄟˋ ㄉㄧˋ，形容嬰兒出生時哭著落到地上，「墜」的賓語為「地」。"
+          },
+          {
+            id: "c0_q14",
+            origNum: 73,
+            subIndex: 2,
+            type: "成語讀音與寫法",
+            question: "關於成語「呱呱墜地」的讀音與用字，下列敘述何者完全正確？",
+            options: [
+              "「呱呱」在此處應讀作「ㄍㄨㄚ ㄍㄨㄚ」",
+              "「墜」字下方是「土」，不可寫成「隊」或「墮」",
+              "「地」字在成語中應讀作「ㄑㄩˋ」",
+              "整句成語用來形容青蛙在池塘裡大聲鳴叫"
+            ],
+            answer: 1,
+            explanation: "「呱呱墜地」的「呱」作小兒哭聲解，音「ㄍㄨ」；「墜」音「ㄓㄨㄟˋ」，意為落下，下方為「土」，用來形容嬰兒誕生。"
+          },
+          {
+            id: "c0_q15",
+            origNum: 73,
+            subIndex: 3,
+            type: "形近字辨析",
+            question: "下列各組形近字，何者用字完全正確？",
+            options: [
+              "呱呱墮地／墜落山谷",
+              "搖搖欲墜／腐化墮落",
+              "天花亂墮／掉隊落單",
+              "隊落深淵／墜入愛河"
+            ],
+            answer: 1,
+            explanation: "「墜（ㄓㄨㄟˋ）」指落下、下垂（如搖搖欲墜、墜落）；「墮（ㄉㄨㄛˋ）」指毀壞、沉淪（如墮落）或落下（如天花亂墜）。B 項完全正確。"
+          }
+        ]
+      },
+      {
+        id: 1,
+        name: "第二類：字形結構與偏旁細節",
+        shortName: "字形結構與偏旁細節",
+        diagnoses: [
+          {
+            origNum: 24,
+            prompt: "象「ㄓㄥ」手法",
+            wrong: "徵（筆畫誤寫）",
+            correct: "徵",
+            mnemonic: "【彳＋山＋一＋王＋攵】左邊雙人旁「彳」，中間由上到下是「山、一、王」，右邊是反文旁「攵」（四畫），切勿寫成「微」或漏掉橫畫！"
+          },
+          {
+            origNum: 28,
+            prompt: "「ㄔㄣˋ」托手法",
+            wrong: "襯（偏旁寫錯）",
+            correct: "襯",
+            mnemonic: "【衣部兩點＋親】襯衫貼身穿著，所以左邊是「衤（衣部，有兩點）」，千萬別少一點寫成示部「礻」！右邊是「親」。"
+          },
+          {
+            origNum: 34,
+            prompt: "編「ㄗㄨㄢˇ」",
+            wrong: "纂（下部寫錯）",
+            correct: "纂",
+            mnemonic: "【竹＋算省＋糸】編纂書籍需要竹簡與絲線裝訂，所以上「竹」下「糸」，讀 ㄗㄨㄢˇ；奪權的「篡（ㄘㄨㄢˋ）」下方才是「厶（私）」。"
+          },
+          {
+            origNum: 35,
+            prompt: "內「ㄏㄢˊ」",
+            wrong: "涵（右半寫錯）",
+            correct: "涵",
+            mnemonic: "【氵＋函】左邊三點水「氵」，右邊「函」裡面是「水」的變形（中間一豎勾，兩側各兩點），外框是「凵」包住，注意筆順與點數！"
+          },
+          {
+            origNum: 52,
+            prompt: "完「ㄅㄧˋ」歸趙",
+            wrong: "璧（下部寫錯）",
+            correct: "璧",
+            mnemonic: "【辟＋玉】和氏璧是一塊美玉，所以下面是「玉」（記得有一點！）；牆「壁」是泥土砌的，下面才是「土」。"
+          }
+        ],
+        questions: [
+          // --- 原卷第 24 題衍生 (3題) ---
+          {
+            id: "c1_q1",
+            origNum: 24,
+            subIndex: 1,
+            type: "寫作手法填空",
+            question: "周敦頤在〈愛蓮說〉中以蓮花象「ㄓㄥ」君子高潔的品格，這種寄託情志的手法十分高明。引號中應填入何字？",
+            options: ["微", "徵", "懲", "癥"],
+            answer: 1,
+            explanation: "「象徵」的「徵」左為「彳」，中為「山、一、王」，右為「攵」。「微」中間是「山、一、几」，讀音與字義皆不同。"
+          },
+          {
+            id: "c1_q2",
+            origNum: 24,
+            subIndex: 2,
+            type: "字形筆畫細節",
+            question: "書寫「象徵」的「徵」字時，最容易寫錯中間與右半部。請問「徵」字中間部分的正確組合（由上而下）為何？",
+            options: [
+              "山 ＋ 一 ＋ 王",
+              "山 ＋ 一 ＋ 壬",
+              "山 ＋ 一 ＋ 几",
+              "山 ＋ 厂 ＋ 王"
+            ],
+            answer: 0,
+            explanation: "「徵」字中間由上而下是「山」、「一」、「王」（最後一橫變提），右邊則是「攵（反文旁）」。"
+          },
+          {
+            id: "c1_q3",
+            origNum: 24,
+            subIndex: 3,
+            type: "形近字辨析",
+            question: "下列哪一個詞語中的「徵」字使用正確？",
+            options: [
+              "具體而「徵」",
+              "「徵」不足道",
+              "「徵」收稅賦",
+              "見「徵」知著"
+            ],
+            answer: 2,
+            explanation: "C 項「徵收稅賦」用「徵（ㄓㄥ）」正確。A 應為「具體而微」；B 應為「微不足道」；D 應為「見微知著」。"
+          },
+
+          // --- 原卷第 28 題衍生 (3題) ---
+          {
+            id: "c1_q4",
+            origNum: 28,
+            subIndex: 1,
+            type: "偏旁細節辨析",
+            question: "作者用牡丹的富貴與菊花的隱逸來「ㄔㄣˋ」托蓮花的高潔。書寫引號中的「襯」字時，左邊部首應該有幾點？",
+            options: [
+              "左邊是「衤」部，共有兩點",
+              "左邊是「礻」部，只有一點",
+              "左邊是「彳」部，沒有點",
+              "左邊是「氵」部，共有三點"
+            ],
+            answer: 0,
+            explanation: "「襯」本義為貼身的內衣，故從「衣（衤）」部，左偏旁必須寫兩點（衤），若少一點則變成「示（礻）」部，屬於常見錯別字。"
+          },
+          {
+            id: "c1_q5",
+            origNum: 28,
+            subIndex: 2,
+            type: "同偏旁詞語歸類",
+            question: "下列哪一組詞語的左偏旁「全部」都是兩點的「衤（衣部）」？",
+            options: [
+              "襯托／祝福／禮貌",
+              "襯衫／初衷／複習",
+              "襯裡／神祕／社團",
+              "映襯／祈禱／視線"
+            ],
+            answer: 1,
+            explanation: "B 項「襯、初、複」皆與衣物有關，左偏旁全為「衤（兩點）」。A 的祝、禮；C 的神、社；D 的祈、視，皆與祭祀神明有關，為「礻（一點）」。"
+          },
+          {
+            id: "c1_q6",
+            origNum: 28,
+            subIndex: 3,
+            type: "課文文意與字形",
+            question: "「紅花還需綠葉來映『ㄔㄣˋ』，才能顯出它的嬌豔。」下列何者填入引號中最恰當？",
+            options: ["襯", "稱", "趁", "琛"],
+            answer: 0,
+            explanation: "「映襯」為修辭法之一，指將兩種不同或相反的事物放在一起比較，使主體更鮮明，寫作「襯」。"
+          },
+
+          // --- 原卷第 34 題衍生 (3題) ---
+          {
+            id: "c1_q7",
+            origNum: 34,
+            subIndex: 1,
+            type: "字形與讀音辨析",
+            question: "司馬光歷時十九年，終於編「ㄗㄨㄢˇ」完成《資治通鑑》這部史學巨著。引號中應填入哪一個字？",
+            options: ["纂", "篡", "算", "鑽"],
+            answer: 0,
+            explanation: "編輯書籍與竹簡、絲線裝訂有關，故從「糸」部，寫作「纂（ㄗㄨㄢˇ）」。「篡（ㄘㄨㄢˋ）」從「厶」部，意為奪取（如篡位）。"
+          },
+          {
+            id: "c1_q8",
+            origNum: 34,
+            subIndex: 2,
+            type: "形近字對比",
+            question: "比較「編纂」與「篡位」兩詞的用字與讀音，下列敘述何者正確？",
+            options: [
+              "兩字讀音相同，都唸作「ㄗㄨㄢˇ」",
+              "「纂」下方是「糸」，唸作「ㄗㄨㄢˇ」；「篡」下方是「厶」，唸作「ㄘㄨㄢˋ」",
+              "「纂」下方是「厶」，唸作「ㄘㄨㄢˋ」；「篡」下方是「糸」，唸作「ㄗㄨㄢˇ」",
+              "兩字都是「竹」部，意義完全相通"
+            ],
+            answer: 1,
+            explanation: "「纂（ㄗㄨㄢˇ）」從糸，意為編輯；「篡（ㄘㄨㄢˋ）」從厶（私），意為以不當手段奪取，音、形、義皆不同。"
+          },
+          {
+            id: "c1_q9",
+            origNum: 34,
+            subIndex: 3,
+            type: "字形結構拆解",
+            question: "書寫「纂」字時，由上到下的結構組成依序為何？",
+            options: [
+              "竹 ＋ 目 ＋ 大 ＋ 糸",
+              "竹 ＋ 日 ＋ 木 ＋ 糸",
+              "艸 ＋ 目 ＋ 廾 ＋ 糸",
+              "竹 ＋ 白 ＋ 廾 ＋ 糸"
+            ],
+            answer: 0,
+            explanation: "「纂」字的結構由上至下為「竹（竹字頭）」＋「目」＋「大」＋「糸」，總共 20 畫，書寫時需留意中間是「目」與「大」。"
+          },
+
+          // --- 原卷第 35 題衍生 (3題) ---
+          {
+            id: "c1_q10",
+            origNum: 35,
+            subIndex: 1,
+            type: "字形結構細節",
+            question: "閱讀經典名著能豐富我們的文化內「ㄏㄢˊ」，提升氣質。書寫「涵」字時，右半部「函」的外框裡面包含哪些筆畫？",
+            options: [
+              "中間一個「水」的變形（豎勾＋左右各兩點）",
+              "中間一個「木」字",
+              "中間一個「禾」字",
+              "中間一個「米」字"
+            ],
+            answer: 0,
+            explanation: "「函」字裡面的筆畫其實是「水」的變體（先寫橫撇、豎勾，再寫左邊兩點、右邊兩點，最後寫外框「凵」），切勿寫成「木」或「米」。"
+          },
+          {
+            id: "c1_q11",
+            origNum: 35,
+            subIndex: 2,
+            type: "同音字辨析",
+            question: "下列哪一個詞語的「ㄏㄢˊ」字，寫法與「內涵」的「涵」相同？",
+            options: [
+              "「ㄏㄢˊ」養品德",
+              "「ㄏㄢˊ」暄問暖",
+              "「ㄏㄢˊ」蓄內斂",
+              "包「ㄏㄢˊ」在內"
+            ],
+            answer: 0,
+            explanation: "A 項「涵養（水部，修養、包容）」與「內涵」同字。B 應為「寒暄」；C 應為「含蓄」；D 應為「包含」。"
+          },
+          {
+            id: "c1_q12",
+            origNum: 35,
+            subIndex: 3,
+            type: "筆順與結構檢核",
+            question: "關於「涵」字的部首與結構，下列敘述何者正確？",
+            options: [
+              "部首是「凵」部，共 10 畫",
+              "部首是「水（氵）」部，右半部「函」不可少寫裡面的四個點",
+              "右半部「函」的最後一筆是中間的豎勾",
+              "「涵」與「函」字義完全無關，不可通用"
+            ],
+            answer: 1,
+            explanation: "「涵」為水部（左三點水），右半部「函」最後一筆是右邊的豎折（完成外框凵），裡面的四個點常被學生漏寫成兩點，須特別留意。"
+          },
+
+          // --- 原卷第 52 題衍生 (3題) ---
+          {
+            id: "c1_q13",
+            origNum: 52,
+            subIndex: 1,
+            type: "成語字形辨析",
+            question: "戰國時代藺相如憑藉智慧與勇氣，成功將和氏璧完「ㄅㄧˋ」歸趙。引號中應填入哪一個字？",
+            options: ["壁", "璧", "避", "臂"],
+            answer: 1,
+            explanation: "「和氏璧」是一塊珍貴的美玉，因此「璧」字下方必須是「玉」部（記得有一點），不可寫成土部的「壁」。"
+          },
+          {
+            id: "c1_q14",
+            origNum: 52,
+            subIndex: 2,
+            type: "形近字辨析",
+            question: "「璧（玉部）」與「壁（土部）」字形極為相似，下列詞語用字何者「錯誤」？",
+            options: [
+              "珠聯璧合",
+              "銅牆鐵壁",
+              "斷垣殘璧",
+              "白璧無瑕"
+            ],
+            answer: 2,
+            explanation: "C 項「斷垣殘壁」指倒塌的牆壁，與泥土建築有關，應該用土部的「壁」，而非玉部的「璧」。"
+          },
+          {
+            id: "c1_q15",
+            origNum: 52,
+            subIndex: 3,
+            type: "部首聯想記憶",
+            question: "下列各組「辟」聲符的形聲字，哪一組的部首與字義配對完全正確？",
+            options: [
+              "璧（玉部，美玉）／壁（土部，牆壁）",
+              "璧（土部，牆壁）／壁（玉部，美玉）",
+              "避（辵部，手臂）／臂（肉部，躲開）",
+              "僻（人部，開闢）／闢（門部，偏遠）"
+            ],
+            answer: 0,
+            explanation: "A 項完全正確：美玉用玉部的「璧」，牆壁用土部的「壁」。"
+          }
+        ]
+      },
+      {
+        id: 2,
+        name: "第三類：易錯字形與聲調辨正",
+        shortName: "易錯字形與聲調辨正",
+        diagnoses: [
+          {
+            origNum: 62,
+            prompt: "克紹箕「ㄑㄧㄡˊ」",
+            wrong: "裘（筆畫誤寫）",
+            correct: "裘",
+            mnemonic: "【上「求」下「衣」】「裘」指皮衣，上面是「求（記得右上有一點！）」、下面是「衣」。「箕裘」指竹器與皮衣，比喻繼承父業。"
+          },
+          {
+            origNum: 63,
+            prompt: "「ㄕㄨㄣˋ」息萬變",
+            wrong: "瞬（字形寫錯）",
+            correct: "瞬",
+            mnemonic: "【目＋舜】眨眼一瞬間跟眼睛有關，所以左邊是「目」；右邊「舜」由上到下是「爫（爪字頭）＋冖＋夕＋舛」，別漏掉「夕」和「舛」！"
+          },
+          {
+            origNum: 87,
+            prompt: "巧舌如「ㄏㄨㄤˊ」",
+            wrong: "簧（筆畫構造錯）",
+            correct: "簧",
+            mnemonic: "【竹＋黃】笙簧古代用竹片製作，所以是「竹」字頭；下方「黃」的中間是「由」（一豎貫穿到底），不是「田」！"
+          },
+          {
+            origNum: 12,
+            prompt: "「濯」清漣而不妖",
+            wrong: "ㄓㄠˋ / ㄔㄨㄛ（聲母誤判）",
+            correct: "ㄓㄨㄛˊ",
+            mnemonic: "【濯音同「卓」】洗滌清波唸「ㄓㄨㄛˊ（濁／卓）」，不可有邊讀邊唸成「耀（ㄧㄠˋ）」或「戳（ㄔㄨㄛ）」。"
+          },
+          {
+            origNum: 48,
+            prompt: "甘「迺」迪總統",
+            wrong: "ㄋㄞˋ（聲調誤判）",
+            correct: "ㄋㄞˇ",
+            mnemonic: "【迺音同「乃」】「迺」是「乃」的異體字，讀三聲「ㄋㄞˇ」，常見於人名（如甘迺迪），別誤讀為四聲「ㄋㄞˋ（奈）」。"
+          }
+        ],
+        questions: [
+          // --- 原卷第 62 題衍生 (3題) ---
+          {
+            id: "c2_q1",
+            origNum: 62,
+            subIndex: 1,
+            type: "成語字形辨析",
+            question: "他從小在父親的工廠耳濡目染，長大後順利接手家族事業，可說是克紹箕「ㄑㄧㄡˊ」。引號中應填入哪一個字？",
+            options: ["求", "裘", "球", "逑"],
+            answer: 1,
+            explanation: "「克紹箕裘」指能繼承父親的事業。「裘」本義為皮衣，字形為上「求」下「衣」。"
+          },
+          {
+            id: "c2_q2",
+            origNum: 62,
+            subIndex: 2,
+            type: "字形筆畫細節",
+            question: "書寫「克紹箕裘」的「裘」字時，下列哪一個細節最容易被遺漏？",
+            options: [
+              "上半部「求」的右上角有一點，下半部「衣」最後兩筆是撇、捺",
+              "上半部是「木」，下半部是「衣」",
+              "左邊是「衤」部，右邊是「求」",
+              "上半部是「求」，下半部是「示」"
+            ],
+            answer: 0,
+            explanation: "「裘」為上下結構，上為「求」（右上有一點，豎勾兩側為點、提、撇、點），下為「衣」（點、橫、撇、豎提、撇、捺）。"
+          },
+          {
+            id: "c2_q3",
+            origNum: 62,
+            subIndex: 3,
+            type: "成語詞義理解",
+            question: "成語「克紹箕裘」中的「箕」與「裘」原意分別是指哪兩種物品？",
+            options: [
+              "掃帚與帽子",
+              "竹製畚箕與皮衣",
+              "木桶與絲綢",
+              "棋盤與毛筆"
+            ],
+            answer: 1,
+            explanation: "語出《禮記》：「良冶之子，必學為裘；良弓之子，必學為箕。」指竹箕與皮衣，後以「克紹箕裘」比喻子孫能繼承父祖之業。"
+          },
+
+          // --- 原卷第 63 題衍生 (3題) ---
+          {
+            id: "c2_q4",
+            origNum: 63,
+            subIndex: 1,
+            type: "成語字形辨析",
+            question: "高山上的天氣「ㄕㄨㄣˋ」息萬變，剛剛還是晴空萬里，轉眼間便雲霧瀰漫。引號中應填入何字？",
+            options: ["順", "舜", "瞬", "遜"],
+            answer: 2,
+            explanation: "「瞬息萬變」形容在極短的時間內發生許多變化，「瞬」為眨眼，從「目」部，寫作「瞬」。"
+          },
+          {
+            id: "c2_q5",
+            origNum: 63,
+            subIndex: 2,
+            type: "字形結構拆解",
+            question: "「瞬」字右半部的「舜」筆畫較多，容易寫錯。請問「舜」字中間（在「冖」的下方）包含哪兩個部件？",
+            options: [
+              "左邊是「夕」，右邊是「舛」",
+              "左邊是「歹」，右邊是「舞」",
+              "左邊是「月」，右邊是「年」",
+              "左邊是「夕」，右邊是「牛」"
+            ],
+            answer: 0,
+            explanation: "「舜」的結構是上「爫（爪）」、中「冖」、下左「夕」、下右「舛（ㄔㄨㄢˇ）」，書寫時左邊是「夕（只有一點）」不要寫成「歹」。"
+          },
+          {
+            id: "c2_q6",
+            origNum: 63,
+            subIndex: 3,
+            type: "同音字辨析",
+            question: "下列詞語中，何者用字完全正確？",
+            options: [
+              "一帆風瞬",
+              "轉瞬即逝",
+              "瞬理成章",
+              "目不轉舜"
+            ],
+            answer: 1,
+            explanation: "B 項「轉瞬即逝」指一眨眼就消逝，用「瞬」正確。A 應為「一帆風順」；C 應為「順理成章」；D 應為「目不轉睛」。"
+          },
+
+          // --- 原卷第 87 題衍生 (3題) ---
+          {
+            id: "c2_q7",
+            origNum: 87,
+            subIndex: 1,
+            type: "成語字形辨析",
+            question: "詐騙集團成員往往巧舌如「ㄏㄨㄤˊ」，民眾若不提高警覺，很容易掉入圈套。引號中應填入何字？",
+            options: ["皇", "黃", "簧", "惶"],
+            answer: 2,
+            explanation: "「簧」指樂器（如笙）中能振動發聲的薄片，古時用竹片製成，故為「竹」字頭，寫作「簧」。"
+          },
+          {
+            id: "c2_q8",
+            origNum: 87,
+            subIndex: 2,
+            type: "筆畫易錯點檢核",
+            question: "寫「簧」字下方的「黃」時，最容易寫錯中間的部件。請問「黃」字中間正確的寫法為何？",
+            options: [
+              "上面是「廿」，中間是「由」（一豎貫穿），下面是「八」",
+              "上面是「艹」，中間是「田」，下面是「八」",
+              "上面是「廿」，中間是「日」，下面是「八」",
+              "上面是「艹」，中間是「白」，下面是「儿」"
+            ],
+            answer: 0,
+            explanation: "標準國字「黃」的筆順是：橫、豎、豎、橫、豎、橫折、橫、豎、橫、撇、點，中間的「一豎」從最上方一直貫穿到底，構成「由」字形，不是「田」！"
+          },
+          {
+            id: "c2_q9",
+            origNum: 87,
+            subIndex: 3,
+            type: "成語詞義與用法",
+            question: "「巧舌如簧」在句中通常用來形容什麼樣的人？",
+            options: [
+              "擅長吹奏竹笛與笙簧的音樂家",
+              "舌頭靈活，能說會道、善於花言巧語的人",
+              "說話結結巴巴、不善表達的人",
+              "個性沉默寡言、深思熟慮的人"
+            ],
+            answer: 1,
+            explanation: "「巧舌如簧」形容舌頭像笙中的簧片一樣靈活能發聲，比喻人能言善道、善於花言巧語（多含貶義）。"
+          },
+
+          // --- 原卷第 12 題衍生 (3題) ---
+          {
+            id: "c2_q10",
+            origNum: 12,
+            subIndex: 1,
+            type: "課文原句注音",
+            question: "〈愛蓮說〉名句：「出淤泥而不染，『濯』清漣而不妖。」引號中「濯」字的正確讀音為何？",
+            options: ["ㄧㄠˋ", "ㄓㄨㄛˊ", "ㄔㄨㄛ", "ㄓㄠˋ"],
+            answer: 1,
+            explanation: "「濯」讀作「ㄓㄨㄛˊ」，音同「濁」、「卓」，意為洗滌。切忌受右半邊「翟」影響而誤讀為「ㄧㄠˋ（耀）」或「ㄔㄨㄛ（戳）」。"
+          },
+          {
+            id: "c2_q11",
+            origNum: 12,
+            subIndex: 2,
+            type: "形聲字家族讀音辨析",
+            question: "下列「翟」聲符的形聲字，哪一組讀音「完全不同」？",
+            options: [
+              "「濯」清漣 ／ 拔「擢」人才",
+              "「耀」眼奪目 ／ 跳「躍」起來",
+              "「戳」破謊言 ／ 「濯」足長流",
+              "「擢」髮難數 ／ 洗「濯」衣物"
+            ],
+            answer: 2,
+            explanation: "C 項「戳」讀作「ㄔㄨㄛ」，「濯」讀作「ㄓㄨㄛˊ」，兩者聲母不同。A、D 皆讀「ㄓㄨㄛˊ」；B 皆讀「ㄧㄠˋ／ㄩㄝˋ」（注：「躍」常讀 ㄩㄝˋ，亦讀 ㄧㄠˋ，但「戳」與「濯」差異最鮮明）。"
+          },
+          {
+            id: "c2_q12",
+            origNum: 12,
+            subIndex: 3,
+            type: "字義理解題",
+            question: "在「濯清漣而不妖」一句中，「濯」字的意思為何？",
+            options: [
+              "照耀",
+              "洗滌",
+              "跳躍",
+              "阻擋"
+            ],
+            answer: 1,
+            explanation: "「濯」意為洗滌。「濯清漣而不妖」是指蓮花經過清水洗滌卻不顯得妖媚。"
+          },
+
+          // --- 原卷第 48 題衍生 (3題) ---
+          {
+            id: "c2_q13",
+            origNum: 48,
+            subIndex: 1,
+            type: "詞語注音辨析",
+            question: "美國前總統甘「迺」迪的演說至今仍為人津津樂道。引號中「迺」字的正確讀音為何？",
+            options: ["ㄋㄞˋ", "ㄋㄞˇ", "ㄋㄟˇ", "ㄒㄧ"],
+            answer: 1,
+            explanation: "「迺」是「乃」的異體字，讀作三聲「ㄋㄞˇ」，不可誤讀為四聲「ㄋㄞˋ」。"
+          },
+          {
+            id: "c2_q14",
+            origNum: 48,
+            subIndex: 2,
+            type: "聲調辨析",
+            question: "下列各組詞語引號中的字，何者讀音與「甘『迺』迪」的「迺」完全相同？",
+            options: [
+              "無可「奈」何",
+              "「乃」至今日",
+              "「耐」人尋味",
+              "「奶」茶飄香"
+            ],
+            answer: 3,
+            explanation: "「迺」與「奶」皆讀作「ㄋㄞˇ」（三聲）。「奈、耐」讀四聲「ㄋㄞˋ」；「乃」雖通「迺」，但選項 D「奶」字是測試三聲「ㄋㄞˇ」的標準同音字（註：乃亦讀 ㄋㄞˇ，此題設計「奶」與「乃」皆為三聲，修正選項 B 為「『娜』嫋多姿」以確保單選唯一性）。"
+          },
+          {
+            id: "c2_q15",
+            origNum: 48,
+            subIndex: 3,
+            type: "異體字知識",
+            question: "「迺」字在字典中常作為哪一個字的異體字，且兩者讀音相同？",
+            options: [
+              "奈（ㄋㄞˋ）",
+              "乃（ㄋㄞˇ）",
+              "內（ㄋㄟˋ）",
+              "西（ㄒㄧ）"
+            ],
+            answer: 1,
+            explanation: "「迺」即「乃」的異體字，音「ㄋㄞˇ」，在古籍與外國人名譯名（如甘迺迪）中經常出現。"
+          }
+        ]
+      },
+      {
+        id: 3,
+        name: "第四類：多音字與聲調偏旁陷阱",
+        shortName: "多音字與聲調偏旁陷阱",
+        diagnoses: [
+          {
+            origNum: 65,
+            prompt: "「琅」「琅」上口",
+            wrong: "ㄌㄤˋ（聲調誤判）",
+            correct: "ㄌㄤˊ",
+            mnemonic: "【琅音同「郎」，二聲】清脆的讀書聲唸「ㄌㄤˊ ㄌㄤˊ 上口」，注意是二聲「ㄌㄤˊ」，不是四聲「浪（ㄌㄤˋ）」！"
+          },
+          {
+            origNum: 68,
+            prompt: "「躊」躇",
+            wrong: "ㄕㄡˋ / ㄔㄡˋ（偏旁誤讀）",
+            correct: "ㄔㄡˊ",
+            mnemonic: "【躊音同「愁」】猶豫不決叫「躊躇（ㄔㄡˊ ㄔㄨˊ）」，不要看右邊有個「壽」就唸成 ㄕㄡˋ，這裡是形聲字音變，唸「ㄔㄡˊ」！"
+          },
+          {
+            origNum: 80,
+            prompt: "色彩斑「斕」",
+            wrong: "ㄌㄢˇ（聲調誤判）",
+            correct: "ㄌㄢˊ",
+            mnemonic: "【斕音同「藍」，二聲】色彩錯雜燦爛唸「斑斕（ㄅㄢ ㄌㄢˊ）」，是二聲「ㄌㄢˊ」，不是三聲「懶（ㄌㄢˇ）」！"
+          },
+          {
+            origNum: 95,
+            prompt: "「黛」青色",
+            wrong: "ㄏㄟ（受「黑」字底誤導）",
+            correct: "ㄉㄞˋ",
+            mnemonic: "【黛音同「代」】古代女子畫眉用的青黑色顏料叫「黛（ㄉㄞˋ）」，「代」才是聲符，「黑」是意符，千萬別唸成「黑」！"
+          },
+          {
+            origNum: 96,
+            prompt: "「釉」綠色",
+            wrong: "ㄧㄡˊ（受「由」誤讀二聲）",
+            correct: "ㄧㄡˋ",
+            mnemonic: "【釉音同「又」，四聲】陶瓷器表面光亮的玻璃質塗層叫「釉（ㄧㄡˋ）」，是四聲去聲，不是二聲「由（ㄧㄡˊ）」！"
+          }
+        ],
+        questions: [
+          // --- 原卷第 65 題衍生 (3題) ---
+          {
+            id: "c3_q1",
+            origNum: 65,
+            subIndex: 1,
+            type: "成語注音辨析",
+            question: "這首五言絕句音韻和諧，讀起來「琅琅」上口，連幼稚園小朋友都能背誦。引號中「琅琅」的正確讀音為何？",
+            options: [
+              "ㄌㄤˋ ㄌㄤˋ",
+              "ㄌㄤˊ ㄌㄤˊ",
+              "ㄌㄤˇ ㄌㄤˇ",
+              "ㄌㄧㄤˊ ㄌㄧㄤˊ"
+            ],
+            answer: 1,
+            explanation: "「琅琅」形容清脆響亮的讀書聲或金石相擊聲，讀作二聲「ㄌㄤˊ ㄌㄤˊ」（音同「郎」），不可誤讀為四聲「ㄌㄤˋ」。"
+          },
+          {
+            id: "c3_q2",
+            origNum: 65,
+            subIndex: 2,
+            type: "同聲符聲調辨析",
+            question: "下列「良」聲符的形聲字，哪一個字的讀音「不是」二聲「ㄌㄤˊ」？",
+            options: [
+              "「琅」琅上口",
+              "「狼」吞虎嚥",
+              "「浪」費時間",
+              "走「廊」盡頭"
+            ],
+            answer: 2,
+            explanation: "C 項「浪費」的「浪」讀作四聲「ㄌㄤˋ」。其餘「琅、狼、廊」皆讀作二聲「ㄌㄤˊ」。"
+          },
+          {
+            id: "c3_q3",
+            origNum: 65,
+            subIndex: 3,
+            type: "形近字辨析",
+            question: "下列哪一個詞語中的「ㄌㄤˊ」字用字正確？",
+            options: [
+              "書聲浪浪",
+              "琳琅滿目",
+              "琅狽為奸",
+              "新琅新娘"
+            ],
+            answer: 1,
+            explanation: "B 項「琳琅滿目」形容美好的事物很多，用「琅」正確。A 應為「書聲琅琅」；C 應為「狼狽為奸」；D 應為「新郎新娘」。"
+          },
+
+          // --- 原卷第 68 題衍生 (3題) ---
+          {
+            id: "c3_q4",
+            origNum: 68,
+            subIndex: 1,
+            type: "偏旁誤讀陷阱",
+            question: "面對這道難題，他在考場上「躊」躇了許久，遲遲無法下筆。引號中「躊」字的正確讀音為何？",
+            options: ["ㄕㄡˋ", "ㄔㄡˊ", "ㄔㄡˋ", "ㄓㄨˋ"],
+            answer: 1,
+            explanation: "「躊躇」讀作「ㄔㄡˊ ㄔㄨˊ」，意為猶豫不決。「躊」不可有邊讀邊唸成「壽（ㄕㄡˋ）」，它與「愁」同音。"
+          },
+          {
+            id: "c3_q5",
+            origNum: 68,
+            subIndex: 2,
+            type: "同聲符讀音辨析",
+            question: "下列「壽」聲符的形聲字，哪一組的讀音「完全相同」？",
+            options: [
+              "「躊」躇滿志 ／ 統「籌」規劃",
+              "「禱」告祈福 ／ 「鑄」造銅器",
+              "「濤」天巨浪 ／ 「壽」比南山",
+              "「籌」備婚禮 ／ 「鑄」成大錯"
+            ],
+            answer: 0,
+            explanation: "A 項「躊」與「籌」皆讀作「ㄔㄡˊ」，讀音完全相同。B 的禱（ㄉㄠˇ）、鑄（ㄓㄨˋ）；C 的濤（ㄊㄠ）、壽（ㄕㄡˋ）；D 的籌（ㄔㄡˊ）、鑄（ㄓㄨˋ）。"
+          },
+          {
+            id: "c3_q6",
+            origNum: 68,
+            subIndex: 3,
+            type: "詞語字形檢核",
+            question: "「躊躇」兩字都是「足」部，下列哪一個詞語的字形與「躊躇」一樣完全正確？",
+            options: [
+              "躊躇不前",
+              "壽躇滿志",
+              "躊儲猶豫",
+              "籌躇不定"
+            ],
+            answer: 0,
+            explanation: "「躊躇」形容人站立原地徘徊不前的樣子，與腳步動作有關，因此兩字皆為「足」部，A 項正確。"
+          },
+
+          // --- 原卷第 80 題衍生 (3題) ---
+          {
+            id: "c3_q7",
+            origNum: 80,
+            subIndex: 1,
+            type: "詞語注音辨析",
+            question: "秋天的山林染上紅、黃、橘等不同色調，色彩斑「斕」，美得像一幅油畫。引號中「斕」字的正確讀音為何？",
+            options: ["ㄌㄢˇ", "ㄌㄢˊ", "ㄌㄢˋ", "ㄌㄧㄢˊ"],
+            answer: 1,
+            explanation: "「斑斕」讀作「ㄅㄢ ㄌㄢˊ」，形容色彩錯雜燦爛。「斕」讀作二聲「ㄌㄢˊ」，不可誤讀為三聲「ㄌㄢˇ（懶）」。"
+          },
+          {
+            id: "c3_q8",
+            origNum: 80,
+            subIndex: 2,
+            type: "同聲符形聲字辨析",
+            question: "下列「闌」聲符的形聲字，哪一個字的讀音「不是」二聲「ㄌㄢˊ」？",
+            options: [
+              "色彩斑「斕」",
+              "波「瀾」壯闊",
+              "「懶」洋洋",
+              "夜深人靜、夜「闌」人靜"
+            ],
+            answer: 2,
+            explanation: "C 項「懶」讀作三聲「ㄌㄢˇ」。其餘「斕、瀾、闌」皆讀作二聲「ㄌㄢˊ」。"
+          },
+          {
+            id: "c3_q9",
+            origNum: 80,
+            subIndex: 3,
+            type: "形近字用字辨析",
+            question: "「色彩斑『ㄌㄢˊ』」的「斕」從「文」部，表示文采、花紋。下列哪一個詞語必須使用水部的「瀾」？",
+            options: [
+              "五彩斑「ㄌㄢˊ」",
+              "力挽狂「ㄌㄢˊ」",
+              "無恥讕言",
+              "木「ㄌㄢˊ」花開"
+            ],
+            answer: 1,
+            explanation: "「力挽狂瀾」比喻盡力挽回險惡的局勢，「瀾」指大波浪，故從水部。A 為「斑斕」；C 為「讕言（言部，毀謗之言）」；D 為「木蘭」。"
+          },
+
+          // --- 原卷第 95 題衍生 (3題) ---
+          {
+            id: "c3_q10",
+            origNum: 95,
+            subIndex: 1,
+            type: "偏旁誤讀陷阱",
+            question: "遠方的山巒在暮色中呈現一片「黛」青色，宛如水墨畫般雅致。引號中「黛」字的正確讀音為何？",
+            options: ["ㄏㄟ", "ㄉㄞˋ", "ㄉㄞˇ", "ㄊㄞˋ"],
+            answer: 1,
+            explanation: "「黛」是上聲下形的形聲字，上方「代」為聲符，下方「黑」為意符，因此讀作「ㄉㄞˋ」，切勿誤讀為「ㄏㄟ（黑）」。"
+          },
+          {
+            id: "c3_q11",
+            origNum: 95,
+            subIndex: 2,
+            type: "詞語字義理解",
+            question: "成語「粉白黛綠」常用來形容美貌女子，請問其中的「黛」字在古代是指什麼？",
+            options: [
+              "紅色的胭脂",
+              "畫眉用的青黑色顏料",
+              "白色的香粉",
+              "金色的髮簪"
+            ],
+            answer: 1,
+            explanation: "「黛」本指古代女子用來畫眉的青黑色礦物顏料，後泛指青黑色（如「黛青色」、「遠山如黛」）。"
+          },
+          {
+            id: "c3_q12",
+            origNum: 95,
+            subIndex: 3,
+            type: "形聲字結構辨識",
+            question: "「黛」字的造字結構為「上聲下形」，下列哪一個字的造字結構與「黛」相同（同樣是上聲下形）？",
+            options: [
+              "架（上聲下形：加＋木）",
+              "花（上形下聲：艸＋化）",
+              "湖（左形右聲：水＋胡）",
+              "鳩（左聲右形：九＋鳥）"
+            ],
+            answer: 0,
+            explanation: "「黛（代＋黑）」與「架（加＋木）」皆屬於上方表音、下方表義的「上聲下形」形聲字。"
+          },
+
+          // --- 原卷第 96 題衍生 (3題) ---
+          {
+            id: "c3_q13",
+            origNum: 96,
+            subIndex: 1,
+            type: "偏旁聲調陷阱",
+            question: "這只宋代青瓷花瓶表面施有一層溫潤的「釉」綠色，光澤內斂。引號中「釉」字的正確讀音為何？",
+            options: ["ㄧㄡˊ", "ㄧㄡˋ", "ㄧㄡˇ", "ㄉㄧˊ"],
+            answer: 1,
+            explanation: "「釉」讀作四聲「ㄧㄡˋ」（音同「又」），指塗在陶瓷器表面、燒製後呈現玻璃光澤的物質。切忌受右半邊「由」影響而誤讀為二聲「ㄧㄡˊ」。"
+          },
+          {
+            id: "c3_q14",
+            origNum: 96,
+            subIndex: 2,
+            type: "同聲符聲調辨析",
+            question: "下列「由」聲符的形聲字，哪一個字同樣讀作四聲「ㄧㄡˋ」？",
+            options: [
+              "「釉」彩陶瓷",
+              "加「油」打氣",
+              "「郵」差送信",
+              "「抽」絲剝繭"
+            ],
+            answer: 0,
+            explanation: "「釉」與「柚（柚子）」皆讀作四聲「ㄧㄡˋ」。「油、郵」讀二聲「ㄧㄡˊ」；「抽」讀一聲「ㄔㄡ」。"
+          },
+          {
+            id: "c3_q15",
+            origNum: 96,
+            subIndex: 3,
+            type: "詞語知識應用",
+            question: "關於「釉」字的部首與詞義，下列敘述何者正確？",
+            options: [
+              "部首是「采（ㄅㄧㄢˋ）」部，與辨別色彩光澤有關",
+              "部首是「米」部，是一種用米做成的顏料",
+              "部首是「田」部，指農田裡的綠色植物",
+              "「釉綠色」與「油綠色」意思完全相同，可以隨意混用"
+            ],
+            answer: 0,
+            explanation: "「釉」的左偏旁是「采（ㄅㄧㄢˋ，野獸足跡，引申為辨別、文采）」，非「米」部，意指陶瓷表面的光澤層，「釉綠色」特指如青瓷釉色般的溫潤綠色。"
+          }
+        ]
+      }
+    ];
+
+    // 修正第 48 題第 2 衍生題選項 B，確保單選唯一正確性
+    categoriesData[2].questions[13].options = [
+      "無可「奈」何",
+      "「娜」嫋多姿",
+      "「耐」人尋味",
+      "「奶」茶飄香"
+    ];
+    categoriesData[2].questions[13].explanation = "「迺」與「奶」皆讀作三聲「ㄋㄞˇ」。「奈、耐」讀四聲「ㄋㄞˋ」；「娜（嫋）」讀三聲「ㄋㄨㄛˇ」。";
+
+    // =========================================================================
+    // 應用程式狀態管理 (支援 localStorage 自動保存進度)
+    // =========================================================================
+    const STORAGE_KEY = "junior_high_chinese_exam2_v1";
+    let state = {
+      currentCategory: 0,
+      filterMode: "all", // 'all' | 'wrong'
+      showDiagnosis: true,
+      answers: {}, // { questionId: selectedOptionIndex }
+      wrongBook: {} // { questionId: true } 曾經答錯就會自動收入錯題本，直到重練答對可選擇移除或保留紀錄
+    };
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          state.answers = parsed.answers || {};
+          state.wrongBook = parsed.wrongBook || {};
+        }
+      } catch (e) {
+        console.warn("讀取儲存進度失敗", e);
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          answers: state.answers,
+          wrongBook: state.wrongBook
+        }));
+      } catch (e) {
+        console.warn("儲存進度失敗", e);
+      }
+    }
+
+    // =========================================================================
+    // 核心渲染函式
+    // =========================================================================
+    function renderAll() {
+      updateStats();
+      renderTabs();
+      renderDiagnosis();
+      renderQuestions();
+    }
+
+    function updateStats() {
+      let totalQuestions = 0;
+      let answeredCount = 0;
+      let correctCount = 0;
+
+      categoriesData.forEach(cat => {
+        cat.questions.forEach(q => {
+          totalQuestions++;
+          if (state.answers[q.id] !== undefined) {
+            answeredCount++;
+            if (state.answers[q.id] === q.answer) {
+              correctCount++;
+            }
+          }
+        });
+      });
+
+      const wrongCount = Object.keys(state.wrongBook).length;
+      const accuracy = answeredCount === 0 ? "--%" : Math.round((correctCount / answeredCount) * 100) + "%";
+      const progressPct = Math.round((answeredCount / totalQuestions) * 100);
+
+      document.getElementById("stat-progress").textContent = `${answeredCount} / ${totalQuestions}`;
+      document.getElementById("stat-accuracy").textContent = accuracy;
+      document.getElementById("progress-bar").style.width = `${progressPct}%`;
+      document.getElementById("wrong-badge").textContent = wrongCount;
+
+      // 更新篩選按鈕樣式
+      const btnAll = document.getElementById("filter-all");
+      const btnWrong = document.getElementById("filter-wrong");
+      if (state.filterMode === "all") {
+        btnAll.className = "px-3.5 py-1.5 rounded-xl text-sm font-medium bg-pine text-white shadow-xs transition cursor-pointer";
+        btnWrong.className = "px-3.5 py-1.5 rounded-xl text-sm font-medium bg-amberwarm-pale text-amberwarm border border-amberwarm-border hover:bg-amberwarm hover:text-white transition cursor-pointer flex items-center gap-1.5";
+      } else {
+        btnAll.className = "px-3.5 py-1.5 rounded-xl text-sm font-medium bg-white text-slate-600 border border-[#E5DFD5] hover:bg-slate-50 transition cursor-pointer";
+        btnWrong.className = "px-3.5 py-1.5 rounded-xl text-sm font-medium bg-amberwarm text-white shadow-xs transition cursor-pointer flex items-center gap-1.5";
+      }
+    }
+
+    function renderTabs() {
+      categoriesData.forEach((cat, idx) => {
+        const btn = document.getElementById(`tab-${idx}`);
+        const countBadge = document.getElementById(`tab-count-${idx}`);
+
+        const doneInCat = cat.questions.filter(q => state.answers[q.id] !== undefined).length;
+        const totalInCat = cat.questions.length;
+        countBadge.textContent = `${doneInCat}/${totalInCat}`;
+
+        const isActive = state.currentCategory === idx;
+        if (isActive) {
+          btn.className = "tab-btn text-left p-3.5 rounded-2xl border-2 transition cursor-pointer flex flex-col justify-between bg-pine text-white border-pine shadow-sm";
+          btn.querySelector("span:first-child").className = "text-xs font-bold opacity-85";
+          countBadge.className = "text-xs px-2 py-0.5 rounded-full bg-white/20 font-semibold";
+        } else {
+          btn.className = "tab-btn text-left p-3.5 rounded-2xl border-2 transition cursor-pointer flex flex-col justify-between bg-white text-ink border-[#E5DFD5] hover:border-pine-border";
+          btn.querySelector("span:first-child").className = "text-xs font-bold text-slate-500";
+          countBadge.className = "text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-semibold";
+        }
+      });
+    }
+
+    function renderDiagnosis() {
+      const section = document.getElementById("diagnosis-section");
+      const toggleBtn = document.getElementById("toggle-diag-btn");
+      if (!state.showDiagnosis) {
+        section.classList.add("hidden");
+        toggleBtn.textContent = "展開診斷口訣卡";
+        return;
+      }
+      section.classList.remove("hidden");
+      toggleBtn.textContent = "收合診斷口訣卡";
+
+      const cat = categoriesData[state.currentCategory];
+      document.getElementById("diag-title").textContent = `${cat.name} — 原卷錯題診斷與記憶口訣`;
+
+      const container = document.getElementById("diag-cards-container");
+      container.innerHTML = cat.diagnoses.map(item => `
+        <div class="bg-paper rounded-xl p-3.5 border border-[#E5DFD5] flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold px-2 py-0.5 rounded-md bg-pine text-white">原卷第 ${item.origNum} 題</span>
+              <span class="text-sm font-bold text-ink zhuyin">${item.prompt}</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs sm:text-sm mb-2 bg-white px-3 py-2 rounded-lg border border-[#EAE4DA]">
+              <span class="text-rose-600 font-medium line-through">誤寫：${item.wrong}</span>
+              <span class="text-slate-400">→</span>
+              <span class="text-pine font-bold">正解：${item.correct}</span>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+            ${item.mnemonic}
+          </p>
+        </div>
+      `).join("");
+    }
+
+    function renderQuestions() {
+      const cat = categoriesData[state.currentCategory];
+      const quizList = document.getElementById("quiz-list");
+      const emptyState = document.getElementById("empty-wrong-state");
+
+      let displayQuestions = cat.questions;
+      if (state.filterMode === "wrong") {
+        displayQuestions = displayQuestions.filter(q => state.wrongBook[q.id]);
+      }
+
+      document.getElementById("quiz-section-title").innerHTML = `
+        <span class="w-2 h-6 bg-amberwarm rounded-full inline-block"></span>
+        <span>${state.filterMode === "wrong" ? "錯題本重練" : "特訓練習題"}（顯示 ${displayQuestions.length} 題）</span>
+      `;
+
+      if (displayQuestions.length === 0) {
+        quizList.innerHTML = "";
+        emptyState.classList.remove("hidden");
+        return;
+      }
+      emptyState.classList.add("hidden");
+
+      const optionLabels = ["A", "B", "C", "D"];
+
+      quizList.innerHTML = displayQuestions.map((q, index) => {
+        const userChoice = state.answers[q.id];
+        const isAnswered = userChoice !== undefined;
+        const isCorrect = isAnswered && userChoice === q.answer;
+        const isInWrongBook = !!state.wrongBook[q.id];
+
+        // 選項按鈕 HTML
+        const optionsHtml = q.options.map((opt, optIdx) => {
+          let btnClass = "option-btn w-full text-left p-3.5 rounded-xl border-2 flex items-center gap-3 cursor-pointer ";
+          let badgeClass = "w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 ";
+
+          if (!isAnswered) {
+            btnClass += "bg-white border-[#E5DFD5] hover:border-pine hover:bg-pine-pale/40 text-ink";
+            badgeClass += "bg-paper text-slate-600 border border-[#DCD5C9]";
+          } else {
+            if (optIdx === q.answer) {
+              btnClass += "bg-emerald-50 border-emerald-600 text-emerald-950 font-medium";
+              badgeClass += "bg-emerald-600 text-white";
+            } else if (optIdx === userChoice && userChoice !== q.answer) {
+              btnClass += "bg-rose-50 border-rose-500 text-rose-950";
+              badgeClass += "bg-rose-500 text-white";
+            } else {
+              btnClass += "bg-slate-50/70 border-[#EAE4DA] text-slate-400 opacity-75";
+              badgeClass += "bg-slate-200 text-slate-500";
+            }
+          }
+
+          return `
+            <button
+              onclick="handleAnswer('${q.id}', ${optIdx})"
+              ${isAnswered ? "disabled" : ""}
+              class="${btnClass}"
+            >
+              <span class="${badgeClass}">${optionLabels[optIdx]}</span>
+              <span class="text-sm sm:text-base zhuyin leading-snug">${opt}</span>
+              ${isAnswered && optIdx === q.answer ? '<span class="ml-auto text-emerald-600 font-bold text-sm">✓ 正確</span>' : ''}
+              ${isAnswered && optIdx === userChoice && userChoice !== q.answer ? '<span class="ml-auto text-rose-600 font-bold text-sm">✕ 誤選</span>' : ''}
+            </button>
+          `;
+        }).join("");
+
+        return `
+          <article id="card-${q.id}" class="bg-white rounded-2xl border ${isAnswered ? (isCorrect ? 'border-emerald-200' : 'border-rose-200') : 'border-[#E5DFD5]'} p-4 sm:p-6 shadow-xs transition">
+            <!-- 題目標籤列 -->
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="px-2.5 py-1 rounded-lg bg-pine-pale text-pine text-xs font-bold">
+                  原卷第 ${q.origNum} 題衍生 · 練習 ${q.subIndex}/3
+                </span>
+                <span class="px-2.5 py-1 rounded-lg bg-paper border border-[#E5DFD5] text-slate-600 text-xs font-medium">
+                  ${q.type}
+                </span>
+                ${isInWrongBook ? '<span class="px-2 py-0.5 rounded-md bg-amberwarm-pale text-amberwarm border border-amberwarm-border text-xs font-bold">★ 錯題本收錄</span>' : ''}
+              </div>
+
+              ${isAnswered ? `
+                <button onclick="retryQuestion('${q.id}')" class="text-xs text-slate-500 hover:text-pine underline cursor-pointer">
+                  重新作答此題
+                </button>
+              ` : ''}
+            </div>
+
+            <!-- 題幹 -->
+            <h4 class="text-base sm:text-lg font-medium text-ink leading-relaxed mb-4 zhuyin">
+              <span class="font-bold text-pine mr-1">${index + 1}.</span>${q.question}
+            </h4>
+
+            <!-- 四個選項 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              ${optionsHtml}
+            </div>
+
+            <!-- 作答後展開解析區 -->
+            ${isAnswered ? `
+              <div class="mt-4 p-4 rounded-xl ${isCorrect ? 'bg-emerald-50/70 border border-emerald-200' : 'bg-amberwarm-pale/70 border border-amberwarm-border'}">
+                <div class="flex items-center justify-between gap-2 mb-1.5">
+                  <div class="flex items-center gap-2 font-bold text-sm ${isCorrect ? 'text-emerald-800' : 'text-amberwarm'}">
+                    <span>${isCorrect ? '🎉 答對了！觀念非常清楚！' : '💡 答錯囉！這題已自動收入「錯題本」'}</span>
+                  </div>
+                  ${isInWrongBook && isCorrect ? `
+                    <button onclick="removeFromWrongBook('${q.id}')" class="text-xs px-2.5 py-1 rounded-lg bg-white border border-emerald-300 text-emerald-700 hover:bg-emerald-100 cursor-pointer font-medium">
+                      已學會，移出錯題本
+                    </button>
+                  ` : ''}
+                </div>
+                <p class="text-xs sm:text-sm text-ink leading-relaxed zhuyin">
+                  <strong class="text-pine">【解析與記憶法】</strong>${q.explanation}
+                </p>
+              </div>
+            ` : ''}
+          </article>
+        `;
+      }).join("");
+    }
+
+    // =========================================================================
+    // 互動操作事件
+    // =========================================================================
+    function selectCategory(idx) {
+      state.currentCategory = idx;
+      renderAll();
+    }
+
+    function setFilterMode(mode) {
+      state.filterMode = mode;
+      renderAll();
+    }
+
+    function toggleDiagnosisCard() {
+      state.showDiagnosis = !state.showDiagnosis;
+      renderDiagnosis();
+    }
+
+    function handleAnswer(questionId, optionIndex) {
+      if (state.answers[questionId] !== undefined) return;
+
+      // 找出題目物件
+      let targetQ = null;
+      for (const cat of categoriesData) {
+        const found = cat.questions.find(q => q.id === questionId);
+        if (found) {
+          targetQ = found;
+          break;
+        }
+      }
+      if (!targetQ) return;
+
+      state.answers[questionId] = optionIndex;
+      if (optionIndex !== targetQ.answer) {
+        state.wrongBook[questionId] = true;
+      }
+
+      saveState();
+      renderAll();
+    }
+
+    function retryQuestion(questionId) {
+      delete state.answers[questionId];
+      saveState();
+      renderAll();
+    }
+
+    function removeFromWrongBook(questionId) {
+      delete state.wrongBook[questionId];
+      saveState();
+      renderAll();
+    }
+
+    // =========================================================================
+    // 成績單總結與重置 Modal 控制
+    // =========================================================================
+    function openSummaryModal() {
+      let totalQ = 0;
+      let totalDone = 0;
+      let totalCorrect = 0;
+      let weakestCat = null;
+      let lowestRate = 101;
+
+      const barsHtml = categoriesData.map(cat => {
+        const catTotal = cat.questions.length;
+        const catDone = cat.questions.filter(q => state.answers[q.id] !== undefined).length;
+        const catCorrect = cat.questions.filter(q => state.answers[q.id] === q.answer).length;
+        const rate = catDone === 0 ? 0 : Math.round((catCorrect / catDone) * 100);
+
+        totalQ += catTotal;
+        totalDone += catDone;
+        totalCorrect += catCorrect;
+
+        if (catDone > 0 && rate < lowestRate) {
+          lowestRate = rate;
+          weakestCat = cat.shortName;
+        }
+
+        return `
+          <div>
+            <div class="flex justify-between text-xs font-medium mb-1">
+              <span class="text-ink">${cat.shortName}</span>
+              <span class="text-slate-600">答對 ${catCorrect} / 已做 ${catDone} 題（正確率 ${catDone === 0 ? '--' : rate + '%'}）</span>
+            </div>
+            <div class="w-full h-2 bg-paper rounded-full overflow-hidden border border-[#E5DFD5]">
+              <div class="h-full ${rate >= 80 ? 'bg-pine' : (rate >= 60 ? 'bg-amberwarm' : 'bg-rose-500')} transition-all duration-300" style="width: ${catDone === 0 ? 0 : rate}%"></div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      const overallRate = totalDone === 0 ? 0 : Math.round((totalCorrect / totalDone) * 100);
+
+      document.getElementById("modal-done").textContent = `${totalDone} / ${totalQ}`;
+      document.getElementById("modal-correct").textContent = totalCorrect;
+      document.getElementById("modal-rate").textContent = `${overallRate}%`;
+      document.getElementById("modal-bars").innerHTML = barsHtml;
+
+      const adviceEl = document.getElementById("modal-advice");
+      if (totalDone === 0) {
+        adviceEl.innerHTML = "尚未開始作答喔！建議先閱讀各分頁上方的「原卷錯題診斷卡」，再逐題完成練習。";
+      } else if (Object.keys(state.wrongBook).length === 0 && totalDone === totalQ) {
+        adviceEl.innerHTML = "🎉 <strong>太厲害了！</strong>你已經完成全部 60 題特訓，而且沒有留下任何未解決的錯題，段考注音國字一定能拿高分！";
+      } else {
+        adviceEl.innerHTML = `💡 <strong>複習建議：</strong>目前錯題本共有 <strong>${Object.keys(state.wrongBook).length}</strong> 題待加強${weakestCat ? `，其中「<strong>${weakestCat}</strong>」的正確率較低` : ''}。建議點擊下方「前往錯題本複習」，把錯題再重練一次！`;
+      }
+
+      const modal = document.getElementById("summary-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeSummaryModal() {
+      const modal = document.getElementById("summary-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function confirmReset() {
+      const modal = document.getElementById("reset-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeResetModal() {
+      const modal = document.getElementById("reset-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function executeReset() {
+      state.answers = {};
+      state.wrongBook = {};
+      state.filterMode = "all";
+      saveState();
+      closeResetModal();
+      renderAll();
+    }
+
+    // 初始化啟動
+    window.addEventListener("DOMContentLoaded", () => {
+      loadState();
+      renderAll();
+    });
+  </script>
+</body>
+</html>
